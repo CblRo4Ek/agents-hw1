@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Мини-трекер учебных задач</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>Трекер задач на неделю</h1>
+
+      <p id="storage-notice" class="notice" hidden>
+        Хранилище недоступно: задачи сохраняются только до перезагрузки страницы.
+      </p>
+
+      <form id="task-form" class="card" novalidate>
+        <div class="field">
+          <label for="title">Название задачи</label>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            autocomplete="off"
+            aria-describedby="title-error"
+          />
+          <p id="title-error" class="error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="hours">Часы (0,5–24, шаг 0,5)</label>
+          <input
+            id="hours"
+            name="hours"
+            type="number"
+            min="0.5"
+            max="24"
+            step="0.5"
+            inputmode="decimal"
+            aria-describedby="hours-error"
+          />
+          <p id="hours-error" class="error" role="alert"></p>
+        </div>
+
+        <button type="submit" class="primary">Добавить задачу</button>
+      </form>
+
+      <section class="card summary" aria-label="Сводка">
+        <div class="summary-item">
+          <span class="summary-label">Всего часов</span>
+          <span id="total-hours" class="summary-value">0 ч</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Выполнено часов</span>
+          <span id="done-hours" class="summary-value">0 ч</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Прогресс</span>
+          <span id="progress" class="summary-value">0%</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="field">
+          <label for="filter">Фильтр списка</label>
+          <select id="filter">
+            <option value="all">Все задачи</option>
+            <option value="active">Активные</option>
+            <option value="done">Выполненные</option>
+          </select>
+        </div>
+
+        <ul id="task-list" class="task-list"></ul>
+        <p id="empty" class="empty" hidden>Список пуст.</p>
+      </section>
+    </main>
+
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>

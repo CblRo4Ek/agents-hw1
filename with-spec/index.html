@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Трекер учебных задач</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1 class="app__title">Трекер учебных задач</h1>
+        <p class="app__lead">
+          Планируйте неделю: добавляйте задачи, отмечайте выполнение и следите
+          за прогрессом.
+        </p>
+      </header>
+
+      <form id="task-form" class="card form" novalidate>
+        <h2 class="card__title">Новая задача</h2>
+
+        <div class="field">
+          <label class="field__label" for="task-title">Название задачи</label>
+          <input
+            class="field__input"
+            id="task-title"
+            name="title"
+            type="text"
+            autocomplete="off"
+            aria-describedby="title-error"
+          />
+          <p class="field__error" id="title-error" role="alert" hidden></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="task-hours">
+            Часы (от 0,5 до 24, шаг 0,5)
+          </label>
+          <input
+            class="field__input"
+            id="task-hours"
+            name="hours"
+            type="number"
+            inputmode="decimal"
+            min="0.5"
+            max="24"
+            step="0.5"
+            aria-describedby="hours-error"
+          />
+          <p class="field__error" id="hours-error" role="alert" hidden></p>
+        </div>
+
+        <button class="button" type="submit">Добавить</button>
+      </form>
+
+      <p class="notice" id="storage-message" role="status" hidden></p>
+
+      <section class="card summary" aria-labelledby="summary-title">
+        <h2 class="card__title" id="summary-title">Итоги за неделю</h2>
+        <dl class="summary__grid">
+          <div class="summary__item">
+            <dt class="summary__label">Всего часов</dt>
+            <dd class="summary__value" id="total-hours">0 ч</dd>
+          </div>
+          <div class="summary__item">
+            <dt class="summary__label">Выполнено часов</dt>
+            <dd class="summary__value" id="done-hours">0 ч</dd>
+          </div>
+        </dl>
+        <div
+          class="progress"
+          id="progress"
+          role="progressbar"
+          aria-labelledby="progress-label"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+        >
+          <div class="progress__bar" id="progress-bar"></div>
+        </div>
+        <p class="progress__text" id="progress-label">
+          Прогресс: <strong id="progress-value">0%</strong>
+        </p>
+      </section>
+
+      <section class="card tasks" aria-labelledby="tasks-title">
+        <h2 class="card__title" id="tasks-title">Задачи</h2>
+
+        <div class="filters" role="group" aria-label="Фильтр задач">
+          <button
+            class="filter"
+            type="button"
+            data-filter="all"
+            aria-pressed="true"
+          >
+            Все
+          </button>
+          <button
+            class="filter"
+            type="button"
+            data-filter="active"
+            aria-pressed="false"
+          >
+            Активные
+          </button>
+          <button
+            class="filter"
+            type="button"
+            data-filter="done"
+            aria-pressed="false"
+          >
+            Выполненные
+          </button>
+        </div>
+
+        <ul class="task-list" id="task-list"></ul>
+        <p class="empty" id="empty-state" hidden></p>
+      </section>
+    </main>
+
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
